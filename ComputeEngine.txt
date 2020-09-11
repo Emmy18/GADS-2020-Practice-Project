@@ -1,0 +1,37 @@
+#Google Cloud Fundamentals: Getting Started with Compute Engine
+export PROJECT_ID=qwiklabs-gcp-00-1a51fd4e82be
+gcloud config set project qwiklabs-gcp-00-1a51fd4e82be
+cloud compute zones list      
+export my_zone1=us-central1-a
+gcloud compute instances create "my-vm-1" \
+--machine-type "n1-standard-1" \
+--image-project "debian-cloud" \
+--image "debian-9-stretch-v20190213" \
+--subnet "default"
+gcloud compute firewall-rules create default-allow-http \
+--direction=INGRESS \
+--priority=1000 \
+--network=default \
+--action=ALLOW \
+--rules=tcp:80
+--source-ranges=0.0.0.0/0 \
+--target-tags=http-server
+gcloud compute instances add-tags my-vm-1 --tags http-server
+gcloud compute instances create "my-vm-2" \
+--machine-type "n1-standard-1" \
+--image-project "debian-cloud" \
+--image "debian-9-stretch-v20190213" \
+--subnet "default"
+exit
+gcloud compute ssh my-vm-2 --zone us-central1-b
+ping my-vm-16.  
+ssh my-vm-1
+sudo apt-get install nginx-light -y
+sudo nano /var/www/html/index.nginx-debian.html
+Hi from Emmanuel
+Ctrl+) > Enter > Ctrl+X
+curl http://localhost/
+curl http://localhost/
+gcloud compute ssh my-vm-2
+gcloud compute ssh my-vm-2
+
